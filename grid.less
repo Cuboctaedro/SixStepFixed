@@ -1,0 +1,241 @@
+//This file includes some basic formating for body and #wrapper elements plus five classes for creating a fixed grid.
+//The grid has six breakpoints. 15 columns, 12, 9, 6, 4 and a very narrow layout without columns.
+//At all sizes the width of the single column is 3.5 ems (56px at 16px font size).
+//The gutter has a fixed width of 2 ems (32px).
+//That way, a six-column block has a width of 31 ems, not far from the preferred line length of 30 ems.
+//A sidebar could be accomodated in a 3-column element and small gallery thumbnails could be 2-columns wide.
+//The five classes, .container, .block, .padded, .left and .right exist to help you use this system without having to write all the media queries necessary.
+//Each class has five variables which determine its behaviour at the five layouts. At the smallest layout all classes fall back to a default behaviour.
+//All horizontal mesurements are in ems. Vertical mesurements are all in multiples of line-height.
+//Changing the default font-size and line-height will affect the entire layout!
+
+html{
+  font-size: 100%; // 16px many things are dimensioned in half-ems, so you should always use a size that gives an even number of pixels as default.
+  line-height: 1.5em;// 24px
+}
+@lineheight: 1.5em; // Same as declared in html !!!
+@gutter: 1em; //IMPORTANT: This is HALF THE ACTUAL GUTTER.
+
+
+#wrapper{
+  margin:0 auto;
+    @media all and (min-width: 84.5em){//Larger than 1352px with default font size. 15 columns.
+       width: 84.5em; 
+    }
+    @media all and (max-width: 84.49em) and (min-width: 68em){//From 1231px to 1088px. 12 columns
+       width: 68em;        
+    }
+    @media all and (max-width: 67.99em) and (min-width: 51.5em){//From 1087px to 824px. 9 columns
+       width: 51.5em; 
+    }
+    @media all and (max-width: 51.49em) and (min-width: 32em){//From 823px to 560px. 6 columns
+       width: 35em; 
+    }
+    @media all and (max-width: 31.99em) and (min-width: 24em){//From 559px to 384px. 4 columns
+       width: 24em;
+    }
+    @media all and (max-width: 23.99em){//Less than  384px. 1 column
+       width: 100%;
+    }
+}
+
+#wrapper-inner{
+  display: inline-block;
+  padding: @lineheight @gutter;
+}
+
+// ELEMENTS //
+
+// The .container class is optional and can be used when nesting of elements is necessary.
+// .container elements can be nested to any depth.
+// .container elements "spill" in the gutter so content should not be placed directly inside them.
+// All content should be placed in .block elements.
+// .block elements can exist independently without being placed inside .container elements.
+// .block elements can't be nested inside other .block elements.
+// .padded elements are an alternative to .block that includes padding. 
+// Like .block, .padded elements can be inside or out of .containers and can't be nested inside .block or .padded elements.
+// All three elements have five variables, which correspond to the number of columns the elements occupy in each of the five layouts created by the media queries. 
+// At page widths less than 24em (384px) all elements get 100% width;
+// Meaningfull values for the variables are: @xl: 1 to 15, @l: 1 to 12, @m: 1 to 9, @s: 1 to 6, @xs: 1 to 4.
+// Default values for each variable give a full width element in all cases.
+
+.container(@xl:15,@l:12,@m:9,@s:6,@xs:4) {
+  @media all and (min-width: 84.5em){
+     width: 5.5em * @xl;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     width: 5.5em *  @l;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     width: 5.5em *  @m;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     width: 5.5em *  @s;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     width: 5.5em *  @xs;
+  }
+  @media all and (max-width: 23.99em){
+     width: 100%;
+  }
+}
+
+.block(@xl:15,@l:12,@m:9,@s:6,@xs:4) {
+  @media all and (min-width: 84.5em){
+     width: (@xl * 5.5em) - 2em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     width: (@l * 5.5em) - 2em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     width: (@m * 5.5em) - 2em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     width: (@s * 5.5em) - 2em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     width: (@xs * 5.5em) - 2em;
+  }
+  @media all and (max-width: 23.99em){
+     width: 100%;
+  }
+}
+
+.padded(@xl:15,@l:12,@m:9,@s:6,@xs:4) {
+  @media all and (min-width: 84.5em){
+     width: (@xl * 5.5em) - 4em;
+     padding: @lineheight 1em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     width: (@l * 5.5em) - 4em;
+     padding: @lineheight 1em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     width: (@m * 5.5em) - 4em;
+     padding: @lineheight 1em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     width: (@s * 5.5em) - 4em;
+     padding: @lineheight 1em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     width: (@xs * 5.5em) - 4em;
+     padding: @lineheight 1em;
+  }
+  @media all and (max-width: 23.99em){
+     width: 92%;
+     padding: @lineheight 4%;
+  }
+}
+
+// The .left class is used to float a .container, .block or .padded element to the left or push it from the left margin.
+// Without variables it will simply float an element to the left.
+// It has five variables, which correspond to the number of columns an element will be pushed to the left in each layout. 
+// Meaningfull values are: @xl: 1 to 15, @l: 1 to 12, @m: 1 to 9, @s: 1 to 6, @xs: 1 to 4.
+// At page widths less than 24em (384px) no elements get pushed;
+// The .right class is used instead of the left when we want to float a block to the right or pull it from the right margin.
+// All .container, .block and .padded elements MUST have either .left or .right applied.
+
+.left(@xl:0,@l:0,@m:0,@s:0,@xs:0){
+  float: left;
+  margin-bottom: 2 * @lineheight;
+  @media all and (min-width: 84.5em){
+     margin-left: (@xl * 5.5em) + 1em;
+     margin-right: 1em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     margin-left: (@l * 5.5em) + 1em;
+     margin-right: 1em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     margin-left: (@m * 5.5em) + 1em;
+     margin-right: 1em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     margin-left: (@s * 5.5em) + 1em;
+     margin-right: 1em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     margin-left: (@xs * 5.5em) + 1em;
+     margin-right: 1em;
+  }
+  @media all and (max-width: 23.99em){
+     margin-left: 0;
+     margin-right: 0;
+  }   
+}
+.container(@a,@b,@c,@d,@e).left(@xl:0,@l:0,@m:0,@s:0,@xs:0){
+  float: left;
+  margin-bottom: 2 * @lineheight;
+  margin-right: 0;
+  @media all and (min-width: 84.5em){
+     margin-left: @xl * 5.5em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     margin-left: @l * 5.5em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     margin-left: @m * 5.5em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     margin-left: @s * 5.5em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     margin-left: @xs * 5.5em;
+  }
+  @media all and (max-width: 23.99em){
+     margin-left: 0;
+  }   
+}
+
+.right(@xl:0,@l:0,@m:0,@s:0,@xs:0){
+  float: right;
+  margin-bottom: 2 * @lineheight;
+  @media all and (min-width: 84.5em){
+     margin-right: (@xl * 5.5em) + 1em;
+     margin-left: 1em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     margin-right: (@l * 5.5em) + 1em;
+     margin-left: 1em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     margin-right: (@m * 5.5em) + 1em;
+     margin-left: 1em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     margin-right: (@s * 5.5em) + 1em;
+     margin-left: 1em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     margin-right: (@xs * 5.5em) + 1em;
+     margin-left: 1em;
+  }
+  @media all and (max-width: 23.99em){
+     margin-right: 0;
+     margin-left: 0;
+  }   
+}
+.container(@a,@b,@c,@d,@e).right(@xl:0,@l:0,@m:0,@s:0,@xs:0){
+  float: right;
+  margin-bottom: 2 * @lineheight;
+  margin-left: 0;
+  @media all and (min-width: 84.5em){
+     margin-right: @xl * 5.5em;
+  }
+  @media all and (max-width: 84.49em) and (min-width: 68em){
+     margin-right: @l * 5.5em;
+  }
+  @media all and (max-width: 67.99em) and (min-width: 51.5em){
+     margin-right: @m * 5.5em;
+  }
+  @media all and (max-width: 51.49em) and (min-width: 32em){
+     margin-right: @s * 5.5em;
+  }
+  @media all and (max-width: 31.99em) and (min-width: 24em){
+     margin-right: @xs * 5.5em;
+  }
+  @media all and (max-width: 23.99em){
+     margin-right: 0;
+  }   
+}
